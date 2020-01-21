@@ -41,7 +41,7 @@ export const clean = () => del(paths.dist);
 export const style = () => gulp.src(paths.style.src)
     .pipe(plumber())
     .pipe(sourcemaps.init())
-    .pipe(sass())
+    .pipe(sass().on('error', sass.logError))
     .pipe(postcss([autoprefixer(), cssnano()]))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.style.dest));
@@ -71,6 +71,7 @@ export const watchFiles = () => {
     gulp.watch(paths.html.watch, html)
 }
 
+
 //live-reload 
 
 export const live = () => {
@@ -82,4 +83,10 @@ export const live = () => {
     })
 }
 
-//export const build = () => gulp.series(del, gulp.parallel(html, style, script))
+//build проекта 
+export const build = gulp.series(clean, gulp.parallel(style, script, html));
+
+//live-reload с обновлениями
+const streaming = gulp.parallel(html, style, script, watchFiles, live);
+
+export default streaming;
