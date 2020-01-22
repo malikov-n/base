@@ -44,7 +44,8 @@ export const style = () => gulp.src(paths.style.src)
     .pipe(sass().on('error', sass.logError))
     .pipe(postcss([autoprefixer(), cssnano()]))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest(paths.style.dest));
+    .pipe(gulp.dest(paths.style.dest))
+    .pipe(livereload.stream())
 
 
 // сборка js файлов
@@ -55,6 +56,7 @@ export const script = () => gulp.src(paths.script.src)
     .pipe(uglify())
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.script.dest))
+    .pipe(livereload.stream())
 
 // сборка html 
 export const html = () => gulp.src(paths.html.src)
@@ -63,6 +65,7 @@ export const html = () => gulp.src(paths.html.src)
     .pipe(include())
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.html.dest))
+    .pipe(livereload.stream())
 
 //watch 
 export const watchFiles = () => {
