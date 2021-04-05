@@ -1,7 +1,6 @@
-body {
-  color: yellow;
-}
+/* Common */
+@import "common/fonts";
+@import "common/global";
 
-body {
-  background: #000;
-}
+/* Sections */
+@import "sections/hello/init";

@@ -17,7 +17,7 @@ const paths = {
     dist: 'dist/',
     live: 'dist/',
     style: {
-        src: 'src/scss/*.scss',
+        src: 'src/scss/style.scss',
         dest: 'dist/style/',
         watch: 'src/scss/**/*.scss'
     },
@@ -30,6 +30,10 @@ const paths = {
         src: 'src/*.html',
         dest: 'dist/',
         watch: 'src/**/*.html'
+    },
+    fonts: {
+        src: 'src/fonts/**',
+        dest: 'dist/fonts',
     }
 }
 
@@ -67,6 +71,11 @@ export const html = () => gulp.src(paths.html.src)
     .pipe(gulp.dest(paths.html.dest))
     .pipe(livereload.stream())
 
+// fonts
+export const fonts = () => gulp.src(paths.fonts.src)
+    .pipe(gulp.dest(paths.fonts.dest))
+    .pipe(livereload.stream())
+
 //watch 
 export const watchFiles = () => {
     gulp.watch(paths.style.watch, style)
@@ -87,9 +96,9 @@ export const live = () => {
 }
 
 //build проекта 
-export const build = gulp.series(clean, gulp.parallel(style, script, html));
+export const build = gulp.series(clean, gulp.parallel(fonts, style, script, html));
 
 //live-reload с обновлениями
-const streaming = gulp.parallel(html, style, script, watchFiles, live);
+const streaming = gulp.parallel(html, style, script, watchFiles, live, fonts);
 
 export default streaming;
