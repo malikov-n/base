@@ -1,3 +1,12 @@
 .l-hello {
-  color: green;
+  padding: 200px 0 0 ;
+  //background: url("//vinni.test/01.jpg") center 0 no-repeat;
+
+  &__h1 {
+    font-size: 58px;
+    line-height: 1.2;
+    text-align: center;
+    color: $black;
+    font-weight: 500;
+  }
 }
